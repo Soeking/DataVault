@@ -4,6 +4,7 @@ open System.Threading
 open InfluxDB3.Client
 open InfluxDB3.Client.Write
 open System
+open StockData
 
 type DatabaseConfig =
     { Host: string
@@ -13,9 +14,15 @@ type DatabaseConfig =
 let createClient (config: DatabaseConfig) =
     new InfluxDBClient(host = config.Host, database = config.Database, token = config.Token)
 
-let writePoint (client: InfluxDBClient) tableName (fields: Map<string, obj>) (tags: Map<string, string>) =
+let writeStockData
+    (client: InfluxDBClient)
+    tableName
+    (fields: Map<string, obj>)
+    (tags: Map<string, string>)
+    (date: DateTime)
+    =
     task {
-        let point = PointData.Measurement(tableName).SetTimestamp(DateTime.UtcNow)
+        let point = PointData.Measurement(tableName).SetTimestamp(date)
 
         // フィールドの追加
         for KeyValue(key, value) in fields do
@@ -50,12 +57,14 @@ let config =
 
 let client = createClient config
 
-let writeStockData (timeStamp: DateTime) =
+let writeStockDataList (stockList: StockDailyData list) seriesName =
     task {
-        let fields = Map [ "s", 36.5 :> obj; "e", 45 :> obj ]
-        let tags = Map [ "region", ""; "com", "" ]
+        stockList
+        |> List.iter (fun st ->
+            let fields = Map [ "value", st.Value :> obj ]
+            let tags = Map [ "series", seriesName ]
 
-        writePoint client "Stock" fields tags
-        |> Async.AwaitTask
-        |> Async.RunSynchronously
+            writeStockData client "Stock" fields tags st.Date
+            |> Async.AwaitTask
+            |> fun t -> Async.RunSynchronously t)
     }

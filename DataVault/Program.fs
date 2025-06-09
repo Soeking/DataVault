@@ -1,5 +1,7 @@
 namespace DataVault
+
 #nowarn "20"
+
 open System
 open System.Collections.Generic
 open System.IO
@@ -29,7 +31,7 @@ module Program =
         app.UseHttpsRedirection()
 
         app.UseAuthorization()
-        app.MapControllers()
+        app.MapGet("/", Func<String>(fun () -> "welcome")) |> ignore
 
         app.Run()
 

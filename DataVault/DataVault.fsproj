@@ -5,8 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="WeatherForecast.fs"/>
-        <Compile Include="Controllers/WeatherForecastController.fs"/>
+        <Folder Include="Controllers\" />
         <Compile Include="StockData.fs" />
         <Compile Include="DataBase.fs" />
         <Compile Include="Program.fs"/>

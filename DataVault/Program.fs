@@ -2,19 +2,11 @@ namespace DataVault
 
 #nowarn "20"
 
-open System
-open System.Collections.Generic
-open System.IO
-open System.Linq
-open System.Threading.Tasks
-open Microsoft.AspNetCore
 open Microsoft.AspNetCore.Builder
-open Microsoft.AspNetCore.Hosting
-open Microsoft.AspNetCore.HttpsPolicy
-open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
-open Microsoft.Extensions.Logging
+open Microsoft.FSharp.Core
+open Route
 
 module Program =
     let exitCode = 0
@@ -31,7 +23,7 @@ module Program =
         app.UseHttpsRedirection()
 
         app.UseAuthorization()
-        app.MapGet("/", Func<String>(fun () -> "welcome")) |> ignore
+        routing app
 
         app.Run()
 

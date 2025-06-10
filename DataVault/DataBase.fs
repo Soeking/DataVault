@@ -58,13 +58,11 @@ let config =
 let client = createClient config
 
 let writeStockDataList (stockList: StockDailyData list) seriesName =
-    task {
-        stockList
-        |> List.iter (fun st ->
-            let fields = Map [ "value", st.Value :> obj ]
-            let tags = Map [ "series", seriesName ]
+    stockList
+    |> List.iter (fun st ->
+        let fields = Map [ "value", st.Value :> obj ]
+        let tags = Map [ "series", seriesName ]
 
-            writeStockData client "Stock" fields tags st.Date
-            |> Async.AwaitTask
-            |> fun t -> Async.RunSynchronously t)
-    }
+        writeStockData client "Stock" fields tags st.Date
+        |> Async.AwaitTask
+        |> fun t -> Async.RunSynchronously t)

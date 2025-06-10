@@ -5,9 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers\" />
         <Compile Include="StockData.fs" />
         <Compile Include="DataBase.fs" />
+        <Compile Include="Route.fs" />
         <Compile Include="Program.fs"/>
     </ItemGroup>
 

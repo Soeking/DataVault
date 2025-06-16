@@ -20,8 +20,6 @@ module Program =
 
         let app = builder.Build()
 
-        app.UseHttpsRedirection()
-
         app.UseAuthorization()
         routing app
 

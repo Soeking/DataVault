@@ -17,8 +17,8 @@ let createClient (config: DatabaseConfig) =
 let writeStockData
     (client: InfluxDBClient)
     tableName
-    (fields: Map<string, obj>)
-    (tags: Map<string, string>)
+    (fields: Map<String, Decimal>)
+    (tags: Map<String, String>)
     (date: DateTime)
     =
     task {
@@ -26,12 +26,7 @@ let writeStockData
 
         // フィールドの追加
         for KeyValue(key, value) in fields do
-            match value with
-            | :? int as v -> point.SetField(key, v) |> ignore
-            | :? float as v -> point.SetField(key, v) |> ignore
-            | :? string as v -> point.SetField(key, v) |> ignore
-            | :? bool as v -> point.SetField(key, v) |> ignore
-            | _ -> ()
+            point.SetField(key, value) |> ignore
 
         // タグの追加
         for KeyValue(key, value) in tags do
@@ -40,7 +35,7 @@ let writeStockData
         do!
             client.WritePointAsync(
                 point,
-                cancellationToken = (new CancellationTokenSource(TimeSpan.FromSeconds(4.0))).Token
+                cancellationToken = (new CancellationTokenSource(TimeSpan.FromSeconds(30.0))).Token
             )
     }
 
@@ -51,7 +46,10 @@ let queryData (client: InfluxDBClient) query =
     }
 
 let config =
-    { Host = Environment.GetEnvironmentVariable("INFLUXDB3_PORT")
+    { Host =
+        Environment.GetEnvironmentVariable("INFLUXDB3_HOST")
+        + ":"
+        + Environment.GetEnvironmentVariable("INFLUXDB3_PORT")
       Database = "DataVault"
       Token = Environment.GetEnvironmentVariable("INFLUXDB3_AUTH_TOKEN") }
 
@@ -60,9 +58,9 @@ let client = createClient config
 let writeStockDataList (stockList: StockDailyData list) seriesName =
     stockList
     |> List.iter (fun st ->
-        let fields = Map [ "value", st.Value :> obj ]
+        let fields = Map [ "value", st.Value ]
         let tags = Map [ "series", seriesName ]
 
-        writeStockData client "Stock" fields tags st.Date
+        writeStockData client "stock" fields tags st.Date
         |> Async.AwaitTask
         |> fun t -> Async.RunSynchronously t)

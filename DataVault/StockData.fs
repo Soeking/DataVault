@@ -4,12 +4,12 @@ open System
 open System.Net.Http
 open System.Text.Json
 
-type StockDailyData = { Date: DateTime; Value: decimal }
+type StockDailyData = { Date: DateTime; Value: Decimal }
 
 type ResponseError =
     | InvalidApiKey
-    | NetworkError of string
-    | ParseError of string
+    | NetworkError of String
+    | ParseError of String
 
 let getStockData (seriesId: string) (apiKey: string) (startDate: DateTime) (endDate: DateTime) =
     async {
@@ -51,14 +51,3 @@ let getNikkei225Data startDate endDate =
     let seriesId = "NIKKEI225"
 
     getStockData seriesId apiKey startDate endDate
-
-let printData () =
-    async {
-        let! data = getNikkei225Data (DateTime(2025, 5, 10)) DateTime.Now
-
-        match data with
-        | Ok items ->
-            items
-            |> List.iter (fun item -> printfn "日付: %s, 値: %.2f" (item.Date.ToString("yyyy-MM-dd")) item.Value)
-        | Error err -> printfn "エラーが発生しました: %A" err
-    }

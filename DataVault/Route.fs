@@ -23,7 +23,7 @@ let insertStockData (startDateText: String) (endDateText: String) =
                 | Ok list -> writeStockDataList list "Nikkei225"
                 | Error er -> printfn $"%A{er}")
         else
-            printfn "datetime parse error"
+            printfn $"datetime parse error start:%s{startDateText} end:%s{endDateText}"
     }
 
 let routing (app: WebApplication) =

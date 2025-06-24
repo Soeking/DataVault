@@ -21,7 +21,7 @@ let writeStockData
     (tags: Map<String, String>)
     (date: DateTime)
     =
-    task {
+    async {
         let point = PointData.Measurement(tableName).SetTimestamp(date)
 
         // フィールドの追加
@@ -32,11 +32,11 @@ let writeStockData
         for KeyValue(key, value) in tags do
             point.SetTag(key, value) |> ignore
 
-        do!
-            client.WritePointAsync(
-                point,
-                cancellationToken = (new CancellationTokenSource(TimeSpan.FromSeconds(30.0))).Token
-            )
+        client.WritePointAsync(
+            point,
+            cancellationToken = (new CancellationTokenSource(TimeSpan.FromSeconds(30.0))).Token
+        )
+        |> ignore
     }
 
 let queryData (client: InfluxDBClient) query =
@@ -61,6 +61,4 @@ let writeStockDataList (stockList: StockDailyData list) seriesName =
         let fields = Map [ "value", st.Value ]
         let tags = Map [ "series", seriesName ]
 
-        writeStockData client "stock" fields tags st.Date
-        |> Async.AwaitTask
-        |> fun t -> Async.RunSynchronously t)
+        writeStockData client "stock" fields tags st.Date |> Async.RunSynchronously)

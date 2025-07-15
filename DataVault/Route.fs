@@ -22,6 +22,13 @@ let insertStockData (startDateText: String) (endDateText: String) =
                 match result with
                 | Ok list -> writeStockDataList list "Nikkei225"
                 | Error er -> printfn $"%A{er}")
+            
+            getSP500Data startDateTime endDateTime
+            |> Async.RunSynchronously
+            |> (fun result ->
+                match result with
+                | Ok list -> writeStockDataList list "SP500"
+                | Error er -> printfn $"%A{er}")
         else
             printfn $"datetime parse error start:%s{startDateText} end:%s{endDateText}"
     }

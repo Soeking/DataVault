@@ -46,8 +46,14 @@ let getStockData (seriesId: string) (apiKey: string) (startDate: DateTime) (endD
         | ex -> return Error(ParseError ex.Message)
     }
 
+let apiKey = Environment.GetEnvironmentVariable("FRED_TOKEN")
+
 let getNikkei225Data startDate endDate =
-    let apiKey = Environment.GetEnvironmentVariable("FRED_TOKEN")
     let seriesId = "NIKKEI225"
+
+    getStockData seriesId apiKey startDate endDate
+
+let getSP500Data startDate endDate =
+    let seriesId = "SP500"
 
     getStockData seriesId apiKey startDate endDate

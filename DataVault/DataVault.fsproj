@@ -6,10 +6,10 @@
 
     <ItemGroup>
         <Compile Include="Data\ApplicationDbContext.fs" />
-        <Compile Include="StockData.fs" />
-        <Compile Include="DataBase.fs" />
-        <Compile Include="Route.fs" />
-        <Compile Include="Program.fs" />
+        <Compile Include="src\StockData.fs" />
+        <Compile Include="src\DataBase.fs" />
+        <Compile Include="src\Route.fs" />
+        <Compile Include="src\Program.fs" />
     </ItemGroup>
 
     <ItemGroup>

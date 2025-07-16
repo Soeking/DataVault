@@ -5,13 +5,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Data\ApplicationDbContext.fs" />
         <Compile Include="StockData.fs" />
         <Compile Include="DataBase.fs" />
         <Compile Include="Route.fs" />
-        <Compile Include="Program.fs"/>
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Giraffe" Version="7.0.2" />
         <PackageReference Include="InfluxDB3.Client" Version="1.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
     </ItemGroup>
 </Project>

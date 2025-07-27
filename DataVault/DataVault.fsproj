@@ -5,10 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Data\ApplicationDbContext.fs" />
-        <Compile Include="src\StockData.fs" />
-        <Compile Include="src\DataBase.fs" />
-        <Compile Include="src\Route.fs" />
+        <Folder Include="src\front\" />
+        <Compile Include="src\external\StockData.fs" />
+        <Compile Include="src\db\ApplicationDbContext.fs" />
+        <Compile Include="src\db\DataBase.fs" />
+        <Compile Include="src\api\Route.fs" />
         <Compile Include="src\Program.fs" />
     </ItemGroup>
 

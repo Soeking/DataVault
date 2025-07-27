@@ -1,4 +1,4 @@
-namespace DataVault.Data
+namespace DataVault.db
 
 open Microsoft.AspNetCore.Identity.EntityFrameworkCore
 open Microsoft.EntityFrameworkCore

@@ -1,4 +1,4 @@
-module StockData
+module DataVault.external.StockData
 
 open System
 open System.Net.Http

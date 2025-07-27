@@ -1,10 +1,10 @@
-module DataBase
+module DataVault.db.DataBase
 
 open System.Threading
 open InfluxDB3.Client
 open InfluxDB3.Client.Write
 open System
-open StockData
+open DataVault.external.StockData
 
 type DatabaseConfig =
     { Host: string

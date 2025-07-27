@@ -4,7 +4,7 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Microsoft.FSharp.Core
-open Route
+open DataVault.api.Route
 
 let exitCode = 0
 

@@ -1,12 +1,12 @@
-module Route
+module DataVault.api.Route
 
 open System
 open System.Threading.Tasks
-open DataBase
+open DataVault.db.DataBase
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Http
 open Microsoft.FSharp.Core
-open StockData
+open DataVault.external.StockData
 
 let insertStockData (startDateText: String) (endDateText: String) =
     task {
@@ -22,7 +22,7 @@ let insertStockData (startDateText: String) (endDateText: String) =
                 match result with
                 | Ok list -> writeStockDataList list "Nikkei225"
                 | Error er -> printfn $"%A{er}")
-            
+
             getSP500Data startDateTime endDateTime
             |> Async.RunSynchronously
             |> (fun result ->

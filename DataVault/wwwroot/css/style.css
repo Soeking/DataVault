@@ -1,3 +1,29 @@
-a {
-    font-style: italic;
+body {
+    margin: 0;
+}
+
+.main {
+    margin: 0 8px;
+}
+
+body > h1:first-of-type {
+    margin-top: 80px;
+}
+
+.header-bar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    background-color: #efefef;
+    z-index: 10;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.header-bar img {
+    height: 60px;
 }

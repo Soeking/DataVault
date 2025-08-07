@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="src\front\" />
+        <Compile Include="src\front\LayoutPage.fs" />
         <Compile Include="src\external\StockData.fs" />
         <Compile Include="src\db\ApplicationDbContext.fs" />
         <Compile Include="src\db\DataBase.fs" />

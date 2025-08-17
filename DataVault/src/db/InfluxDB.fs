@@ -1,4 +1,4 @@
-module DataVault.db.DataBase
+module DataVault.db.InfluxDB
 
 open System.Threading
 open InfluxDB3.Client

@@ -2,7 +2,7 @@ module DataVault.api.Route
 
 open System
 open System.Threading.Tasks
-open DataVault.db.DataBase
+open DataVault.db.InfluxDB
 open DataVault.front.Index
 open DataVault.front.Login
 open DataVault.front.Register
@@ -56,7 +56,7 @@ let webRouting: HttpFunc -> HttpContext -> HttpFuncResult =
     choose
         [ GET
           >=> choose
-                  [ route "/" >=> htmlView indexPage
+                  [ route "/" >=> mustBeLoggedIn >=> htmlView indexPage
                     route "/register" >=> htmlView registerPage
                     route "/login" >=> htmlView (loginPage false)
                     route "/logout" >=> mustBeLoggedIn >=> logoutHandler ]

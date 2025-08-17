@@ -11,7 +11,7 @@
         <Compile Include="src\front\Register.fs" />
         <Compile Include="src\external\StockData.fs" />
         <Compile Include="src\db\ApplicationDbContext.fs" />
-        <Compile Include="src\db\DataBase.fs" />
+        <Compile Include="src\db\InfluxDB.fs" />
         <Compile Include="src\api\Route.fs" />
         <Compile Include="src\Program.fs" />
     </ItemGroup>

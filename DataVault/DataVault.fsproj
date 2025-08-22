@@ -12,6 +12,7 @@
         <Compile Include="src\external\StockData.fs" />
         <Compile Include="src\db\ApplicationDbContext.fs" />
         <Compile Include="src\db\InfluxDB.fs" />
+        <Compile Include="src\api\PostFunc.fs" />
         <Compile Include="src\api\Route.fs" />
         <Compile Include="src\Program.fs" />
     </ItemGroup>

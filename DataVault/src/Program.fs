@@ -51,11 +51,11 @@ let configureServices (services: IServiceCollection) =
     services
         .AddIdentity<IdentityUser, IdentityRole>(fun options ->
             // Password settings
-            options.Password.RequireDigit <- false
-            options.Password.RequiredLength <- 4
+            options.Password.RequireDigit <- true
+            options.Password.RequiredLength <- 15
             options.Password.RequireNonAlphanumeric <- false
             options.Password.RequireUppercase <- false
-            options.Password.RequireLowercase <- false
+            options.Password.RequireLowercase <- true
 
             // Lockout settings
             options.Lockout.DefaultLockoutTimeSpan <- TimeSpan.FromMinutes 30.0

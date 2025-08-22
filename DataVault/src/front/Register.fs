@@ -36,7 +36,7 @@ let registerHandler: HttpHandler =
         task {
             let! model = ctx.BindFormAsync<RegisterModel>()
 
-            if Array.contains model.UserName getAllowedUser then
+            if Array.contains model.Email getAllowedUser then
                 let user = IdentityUser(UserName = model.UserName, Email = model.Email)
                 let userManager = ctx.GetService<UserManager<IdentityUser>>()
                 let! result = userManager.CreateAsync(user, model.Password)

@@ -52,7 +52,7 @@ let configureServices (services: IServiceCollection) =
         .AddIdentity<IdentityUser, IdentityRole>(fun options ->
             // Password settings
             options.Password.RequireDigit <- true
-            options.Password.RequiredLength <- 15
+            options.Password.RequiredLength <- 8
             options.Password.RequireNonAlphanumeric <- false
             options.Password.RequireUppercase <- false
             options.Password.RequireLowercase <- true

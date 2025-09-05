@@ -38,5 +38,5 @@ let webRouting: HttpFunc -> HttpContext -> HttpFuncResult =
           >=> choose
                   [ route "/register" >=> registerHandler
                     route "/login" >=> loginHandler
-                    route "/stock/insert" >=> mustBeLoggedIn >=> insertStockHandler ]
+                    route "/stock/insert" >=> insertStockHandler ]
           setStatusCode 404 >=> text "Not Found" ]

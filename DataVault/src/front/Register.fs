@@ -36,7 +36,7 @@ let registerHandler: HttpHandler =
         task {
             let! model = ctx.BindFormAsync<RegisterModel>()
 
-            if Array.contains model.Email getAllowedUser then
+            if Array.contains model.UserName getAllowedUser then
                 let user = IdentityUser(UserName = model.UserName, Email = model.Email)
                 let userManager = ctx.GetService<UserManager<IdentityUser>>()
                 let! result = userManager.CreateAsync(user, model.Password)
@@ -55,7 +55,7 @@ let registerHandler: HttpHandler =
                 | true ->
                     let signInManager = ctx.GetService<SignInManager<IdentityUser>>()
                     do! signInManager.SignInAsync(user, true)
-                    return! redirectTo false "/user" next ctx
+                    return! redirectTo false "/" next ctx
             else
                 return! showErrors "invalid user" next ctx
         }

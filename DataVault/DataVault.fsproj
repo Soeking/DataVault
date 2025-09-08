@@ -5,13 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="src\external\StockData.fs" />
+        <Compile Include="src\db\ApplicationDbContext.fs" />
+        <Compile Include="src\db\InfluxDB.fs" />
         <Compile Include="src\front\LayoutPage.fs" />
         <Compile Include="src\front\Login.fs" />
         <Compile Include="src\front\Index.fs" />
         <Compile Include="src\front\Register.fs" />
-        <Compile Include="src\external\StockData.fs" />
-        <Compile Include="src\db\ApplicationDbContext.fs" />
-        <Compile Include="src\db\InfluxDB.fs" />
+        <Compile Include="src\front\FileDownload.fs" />
         <Compile Include="src\api\PostFunc.fs" />
         <Compile Include="src\api\Route.fs" />
         <Compile Include="src\Program.fs" />

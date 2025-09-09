@@ -70,7 +70,7 @@ let readTable seriesName =
         let list = ResizeArray<StockDailyData>()
 
         let query =
-            $"SELECT value FROM stock WHERE series = '%s{seriesName}' ORDER BY time ASC"
+            $"SELECT value, time FROM stock WHERE series = '%s{seriesName}' ORDER BY time ASC"
 
         let! result = queryData client query
 
@@ -84,7 +84,7 @@ let readTable seriesName =
                     try
                         Nullable.op_Explicit x
                     with _ ->
-                        0)
+                        bigint 0)
                 |> int64
                 |> fun x -> x / 1_000_000L |> DateTimeOffset.FromUnixTimeMilliseconds
 

@@ -19,11 +19,11 @@ let generateCSVStream seriesName =
         let! dailyDatas = readTable seriesName
 
         dailyDatas
-        |> Seq.map (fun x -> $"{x.Value},{x.Date}")
+        |> Seq.map (fun x -> $"{x.Value},{x.Date.Year}/{x.Date.Month}/{x.Date.Day}")
         |> Seq.iter writer.WriteLine
+
         writer.Dispose()
 
-        // return writer.BaseStream
         return File.Open(tempFilePath, FileMode.Open) |> Stream.Synchronized
     }
 

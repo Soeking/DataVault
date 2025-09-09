@@ -6,7 +6,7 @@ open Giraffe.ViewEngine
 open Microsoft.AspNetCore.Http
 open Microsoft.AspNetCore.Identity
 
-let loginPage (loginFailed: bool) : 'a =
+let loginPage (loginFailed: bool)  =
     [ if loginFailed then
           yield p [ _style "color: Red;" ] [ str "Login failed." ]
 

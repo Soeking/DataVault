@@ -19,7 +19,10 @@ let webRouting: HttpFunc -> HttpContext -> HttpFuncResult =
                     route "/login" >=> htmlView (loginPage false)
                     route "/logout" >=> mustBeLoggedIn >=> logoutHandler
                     route "/file" >=> mustBeLoggedIn >=> htmlView filePage
-                    route "/file/sample" >=> mustBeLoggedIn >=> dynamicDownloadHandler ]
+                    route "/file/Nikkei225"
+                    >=> mustBeLoggedIn
+                    >=> dynamicDownloadHandler "Nikkei225"
+                    route "/file/SP500" >=> mustBeLoggedIn >=> dynamicDownloadHandler "SP500" ]
           POST
           >=> choose
                   [ route "/register" >=> registerHandler

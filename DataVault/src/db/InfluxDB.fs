@@ -70,7 +70,7 @@ let readTable seriesName =
         let list = ResizeArray<StockDailyData>()
 
         let query =
-            $"SELECT value FROM stock WHERE series = %s{seriesName} ORDER BY time ASC"
+            $"SELECT value FROM stock WHERE series = '%s{seriesName}' ORDER BY time ASC"
 
         let! result = queryData client query
 
@@ -80,7 +80,11 @@ let readTable seriesName =
         while! enum.MoveNextAsync() do
             let timestamp =
                 enum.Current.GetTimestamp()
-                |> Nullable.op_Explicit
+                |> (fun x ->
+                    try
+                        Nullable.op_Explicit x
+                    with _ ->
+                        0)
                 |> int64
                 |> fun x -> x / 1_000_000L |> DateTimeOffset.FromUnixTimeMilliseconds
 
